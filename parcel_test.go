@@ -52,11 +52,10 @@ func TestAddGetDelete(t *testing.T) {
 
 	require.NoError(t, err)
 
-	assert.Equal(t, id, p.Number)
-	assert.Equal(t, parcel.Client, p.Client)
-	assert.Equal(t, parcel.Status, p.Status)
-	assert.Equal(t, parcel.Address, p.Address)
-	assert.Equal(t, parcel.CreatedAt, p.CreatedAt)
+	expected := parcel
+	expected.Number = id
+
+	assert.Equal(t, expected, p)
 
 	// delete
 	// удалите добавленную посылку, убедитесь в отсутствии ошибки
@@ -177,11 +176,7 @@ func TestGetByClient(t *testing.T) {
 
 		require.Contains(t, parcelMap, parcel.Number)
 
-		assert.Equal(t, parcel.Number, res.Number)
-		assert.Equal(t, parcel.Client, res.Client)
-		assert.Equal(t, parcel.Status, res.Status)
-		assert.Equal(t, parcel.Address, res.Address)
-		assert.Equal(t, parcel.CreatedAt, res.CreatedAt)
+		assert.Equal(t, parcel, res)
 
 	}
 }
